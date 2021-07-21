@@ -1,11 +1,12 @@
 .game {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
   margin-top: 10em;
-  flex-direction: row;
   height: 100%;
 }
 
 .game-info {
-  margin-left: 20px;
+  margin-top: 20px;
 }

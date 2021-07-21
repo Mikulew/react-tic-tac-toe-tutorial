@@ -1,53 +1,22 @@
 import { Component } from "react";
 import Square from '../Square/Square';
-import { calculateWinner } from "../../helpers";
 import "./Board.css";
 
 class Board extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      squares: Array(9).fill(null),
-      xIsNext: true,
-    };
-  }
-
-  handleClick(i) {
-    const squares = this.state.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      squares,
-      xIsNext: !this.state.xIsNext,
-    });
-  }
-
   renderSquare(i) {
-    const { squares } = this.state;
+    const { squares, onClick } = this.props;
 
     return (
       <Square
         value={squares[i]}
-        onClick={() => this.handleClick(i)}
+        onClick={() => onClick(i)}
       />
     );
   }
 
   render() {
-    const { squares, xIsNext } = this.state;
-    const winner = calculateWinner(squares);
-    let status;
-    if (winner) {
-      status = `Winner: ${winner}`;
-    } else {
-      status = `Next player: ${xIsNext ? 'X' : 'O'}`
-    }
-
     return (
       <div>
-        <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
